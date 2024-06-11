@@ -1,13 +1,12 @@
 <template>
   <div class="container">
-    <div
-      class="btn-group btn-group-lg rounded-pill"
-      style="background-color: #96e8cd"
-    >
-      <button
+    <div class="btn-group btn-group-sm rounded-pill">
+      <button @click="navigate('/Search')">
+        <i class="fa-sharp fa-solid fa-magnifying-glass"></i></button
+      ><button
         type="button"
         class="btn btn-primary rounded-pill"
-        style="width: 100px; position: relative; left: 0"
+        style="width: 90px; right: 100px"
       >
         일일
       </button>
@@ -43,7 +42,7 @@
     <div class="summary">
       <div>
         <button>
-          수입<span class="income">{{ income }}</span>
+          <span class="income">{{ income }} 수입</span>
         </button>
       </div>
       <div>
@@ -85,9 +84,6 @@
       </button>
       <button @click="navigate('/add')">
         <i class="fa fa-plus"></i>
-      </button>
-      <button @click="navigate('/settings')">
-        <i class="fa fa-cog"></i>
       </button>
     </div>
   </div>
