@@ -45,18 +45,14 @@
         <button>
           수입<span class="income">{{ income }}</span>
         </button>
-        <!-- 수입 <span class="income">{{ income }}</span> -->
       </div>
       <div>
         <button>
           지출<span class="expenses">{{ expenses }}</span>
         </button>
-        <!-- 수입 <span class="income">{{ income }}</span> -->
       </div>
       <div>
         <span class="totalBalance">합계{{ totalBalance }}</span>
-
-        <!-- 수입 <span class="income">{{ income }}</span> -->
       </div>
     </div>
     <div class="transactions">
@@ -100,7 +96,6 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { useTransactionStore } from '@/stores/transaction';
-import 'font-awesome/css/font-awesome.min.css';
 
 const transactionStore = useTransactionStore();
 

@@ -79,23 +79,38 @@ body {
   margin: 4px 0;
 }
 
-/* 헤더 스타일 */
+/* 버튼 스타일 수정 */
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px; /* 버튼 안의 텍스트 크기 */
+  display: flex;
+  align-items: center; /* 텍스트와 아이콘을 중앙 정렬 */
+}
+
+button:focus {
+  outline: none;
+}
+
+/* 헤더 스타일 수정 */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #f4f4f4;
-  text-align: center;
   padding: 1rem;
 }
 
 .header-left,
 .header-right {
-  flex: 1;
+  display: flex;
+  align-items: center; /* 아이콘과 텍스트를 동일 선상에 정렬 */
 }
 
 .header-center {
-  flex: 2;
+  flex: 1;
+  text-align: center;
 }
 
 .header h1 {
@@ -104,9 +119,9 @@ body {
 }
 
 .header p {
-  display: inline;
-  font-size: 1rem;
+  font-size: 1.5rem; /* 원하는 크기로 조정 */
   color: #666;
+  margin: 0; /* 여백을 없애기 위해 */
 }
 
 /* 요약 섹션 스타일 */
@@ -116,6 +131,17 @@ body {
   margin: 1rem 0;
 }
 
+.summary button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px; /* 원하는 여백 설정 */
+}
+
+.summary button:focus {
+  outline: none;
+}
 .income,
 .expenses,
 .total {
