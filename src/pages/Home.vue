@@ -55,11 +55,7 @@
       </div>
     </div>
     <div class="transactions">
-      <div
-        v-for="transaction in transactions"
-        :key="transaction.id"
-        class="transaction"
-      >
+      <div v-for="transaction in transactions" :key="transaction.id" class="transaction">
         <div class="transaction-date">
           {{ formatDate(transaction.date) }}
         </div>
@@ -116,9 +112,7 @@ const nextMonth = () => {
 
 const income = computed(() => transactionStore.income.toLocaleString());
 const expenses = computed(() => transactionStore.expenses.toLocaleString());
-const totalBalance = computed(() =>
-  transactionStore.totalBalance.toLocaleString()
-);
+const totalBalance = computed(() => transactionStore.totalBalance.toLocaleString());
 const transactions = computed(() => transactionStore.transactions);
 
 const formatDate = (date) => {
