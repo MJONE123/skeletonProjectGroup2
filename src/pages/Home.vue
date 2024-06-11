@@ -1,30 +1,9 @@
 <template>
   <div class="container">
-    <div
-      class="btn-group btn-group-lg rounded-pill"
-      style="background-color: #96e8cd"
-    >
-      <button
-        type="button"
-        class="btn btn-primary rounded-pill"
-        style="width: 100px; position: relative; left: 0"
-      >
-        일일
-      </button>
-      <button
-        type="button"
-        class="btn btn-primary rounded-pill"
-        style="width: 100px; position: absolute; left: 50px"
-      >
-        월별
-      </button>
-      <button
-        type="button"
-        class="btn btn-primary rounded-pill"
-        style="width: 100px; position: relative; left: 100px"
-      >
-        요약
-      </button>
+    <div class="btn-group btn-group-lg rounded-pill" style="background-color: #96e8cd">
+      <button type="button" class="btn btn-primary rounded-pill" style="width: 100px; position: relative; left: 0">일일</button>
+      <button type="button" class="btn btn-primary rounded-pill" style="width: 100px; position: absolute; left: 50px">월별</button>
+      <button type="button" class="btn btn-primary rounded-pill" style="width: 100px; position: relative; left: 100px">요약</button>
     </div>
 
     <div class="header">
@@ -60,11 +39,7 @@
       </div>
     </div>
     <div class="transactions">
-      <div
-        v-for="transaction in transactions"
-        :key="transaction.id"
-        class="transaction"
-      >
+      <div v-for="transaction in transactions" :key="transaction.id" class="transaction">
         <div class="transaction-date">
           {{ formatDate(transaction.date) }}
         </div>
@@ -125,9 +100,7 @@ const nextMonth = () => {
 
 const income = computed(() => transactionStore.income.toLocaleString());
 const expenses = computed(() => transactionStore.expenses.toLocaleString());
-const totalBalance = computed(() =>
-  transactionStore.totalBalance.toLocaleString()
-);
+const totalBalance = computed(() => transactionStore.totalBalance.toLocaleString());
 const transactions = computed(() => transactionStore.transactions);
 
 const formatDate = (date) => {
