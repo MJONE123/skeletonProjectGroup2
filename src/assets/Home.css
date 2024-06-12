@@ -19,7 +19,7 @@ body {
 }
 
 .container {
-  max-width: 375px;
+  max-width: 1200px;
   height: 812px;
   margin: 0 auto;
   background-color: white;
@@ -106,9 +106,11 @@ button:focus {
 .header-left,
 .header-right {
   display: flex;
-  align-items: center; /* 아이콘과 텍스트를 동일 선상에 정렬 */
 }
-
+.header-left button,
+.header-right button {
+  font-size: 35px;
+}
 .header-center {
   flex: 1;
   text-align: center;
@@ -121,7 +123,7 @@ button:focus {
 
 .header p {
   font-size: 1.5rem; /* 원하는 크기로 조정 */
-  color: #666;
+  color: black;
   margin: 0; /* 여백을 없애기 위해 */
 }
 
@@ -331,6 +333,7 @@ button:focus {
   border: 1px solid #ccc;
   border-radius: 5px;
 }
+
 .modal2 {
   position: fixed;
   top: 0;
@@ -350,8 +353,10 @@ button:focus {
   max-width: 500px;
   width: 90%;
 }
+
 .addButton {
 }
+
 /* 모바일 디바이스 대응을 위한 미디어 쿼리 */
 @media (max-width: 600px) {
   .navbar {
