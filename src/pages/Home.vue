@@ -17,6 +17,14 @@
       <button @click="routerPush('/Settings')">
         <i class="bi bi-gear"></i>
       </button>
+      <button
+        @click="navigate('/Settings')"
+        type="button"
+        class="btn btn-primary rounded-pill"
+        style="width: 100px; position: fixed; left: 50px"
+      >
+        설정
+      </button>
     </div>
 
     <div class="header">
