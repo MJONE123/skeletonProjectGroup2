@@ -53,17 +53,13 @@ const date = ref('');
 const amount = ref(0);
 const category = ref('');
 const description = ref('');
+const showModal = ref(true); // 모달을 처음에 보여주도록 설정
 
 const setType = (newType) => {
   type.value = newType;
 };
 
 const submitTransaction = () => {
-  // if (!date.value || !amount.value || !category.value || !description.value) {
-  //   // 경고 표시
-  //   alert('선택사항을 모두 입력해주세요.');
-  //   return; // 함수 종료
-  // }
   if (!date.value) {
     alert('날짜를 선택해주세요.');
     return;
@@ -95,8 +91,22 @@ const submitTransaction = () => {
   amount.value = 0;
   category.value = '';
   description.value = '';
-
+  closeModal();
   // Emit close event to close the modal
+};
+const closeModal = () => {
+  showModal.value = false; // 모달을 닫음
+  // 부모 컴포넌트로 모달이 닫혔음을 알림
   $emit('close');
+};
+const formatAmount = () => {
+  // 입력된 값을 가져옴
+  let inputAmount = amount.value;
+  // 입력된 값이 없으면 함수 종료
+  if (!inputAmount) return;
+  // 입력된 값이 1000원 단위로 나누어 떨어지지 않으면 함수 종료
+  if (inputAmount % 1000 !== 0) return;
+  // 입력된 값을 1000원 단위로 변환하여 표시
+  amount.value = inputAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 </script>

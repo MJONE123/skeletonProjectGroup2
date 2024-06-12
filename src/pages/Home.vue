@@ -1,12 +1,10 @@
 <template>
   <div class="container">
     <div class="btn-group btn-group-sm rounded-pill">
-      <button @click="navigate('/Search')">
-        <i class="fa-sharp fa-solid fa-magnifying-glass"></i></button
-      ><button
+      <button
         type="button"
         class="btn btn-primary rounded-pill"
-        style="width: 90px; right: 100px"
+        style="width: 90px; position: fi; right: 100px"
       >
         일일
       </button>
@@ -24,6 +22,14 @@
         style="width: 100px; position: relative; left: 100px"
       >
         합계
+      </button>
+      <button
+        @click="navigate('/Settings')"
+        type="button"
+        class="btn btn-primary rounded-pill"
+        style="width: 100px; position: fixed; left: 50px"
+      >
+        설정
       </button>
     </div>
 
@@ -43,16 +49,16 @@
     <div class="summary">
       <div>
         <button>
-          <span class="income">{{ income }} 수입</span>
+          수입<span class="income">{{ income }}원 </span>
         </button>
       </div>
       <div>
         <button>
-          지출<span class="expenses">{{ expenses }}</span>
+          지출<span class="expenses">{{ expenses }}원</span>
         </button>
       </div>
       <div>
-        <span class="totalBalance">합계{{ totalBalance }}</span>
+        <span class="totalBalance">합계{{ totalBalance }}원</span>
       </div>
     </div>
     <div class="transactions">
@@ -74,7 +80,7 @@
               expense: transaction.amount < 0,
             }"
           >
-            {{ transaction.amount }}원
+            {{ formatAmount(transaction.amount) }}원
           </div>
         </div>
       </div>
@@ -84,7 +90,7 @@
     </div>
 
     <!-- 모달 창 -->
-    <div v-if="showModal" class="modal2">
+    <div v-if="showModal" class="modal">
       <div class="modal-content">
         <AddTransaction @close="showModal = false" />
       </div>
@@ -97,6 +103,7 @@ import { ref, computed } from 'vue';
 import { useTransactionStore } from '@/stores/transaction';
 import { useRouter } from 'vue-router';
 import AddTransaction from './AddTransaction.vue';
+
 const router = useRouter();
 const transactionStore = useTransactionStore();
 const currentDate = ref(new Date());
@@ -126,7 +133,10 @@ const formatDate = (date) => {
   const [year, month, day] = date.split('-');
   return `${parseInt(month)}월 ${parseInt(day)}일`;
 };
-
+const formatAmount = (amount) => {
+  if (!amount) return '';
+  return amount.toLocaleString();
+};
 const navigate = (path) => {
   router.push(path);
 };
