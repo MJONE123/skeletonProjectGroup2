@@ -85,9 +85,87 @@ button {
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 16px; /* 버튼 안의 텍스트 크기 */
+  font-size: 16px;
   display: flex;
-  align-items: center; /* 텍스트와 아이콘을 중앙 정렬 */
+  align-items: center;
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+}
+
+.btn-group .btn {
+  width: auto;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
+.btn-group .btn i {
+  left: 5px;
+}
+.btn-primary {
+  background-color: #eeeeee;
+  border-color: #eeeeee;
+  color: #999;
+  font-weight: bold;
+}
+
+.btn-primary:hover {
+  background-color: #96e8cd;
+  border-color: #96e8cd;
+  font-weight: bold;
+  color: black;
+}
+.btn-primary:active,
+.btn-primary:focus {
+  background-color: #96e8cd;
+  border-color: #96e8cd;
+  color: black;
+}
+
+.start-btn {
+  border-radius: 50rem 0 0 50rem;
+}
+
+.end-btn {
+  border-radius: 0 50rem 50rem 0;
+}
+
+.btn-selected {
+  background-color: #96e8cd;
+  border-color: #96e8cd;
+  font-weight: bold;
+  color: black;
+}
+.btn-selected-active {
+  background-color: #96e8cd;
+  border-color: #96e8cd;
+}
+
+.rounded-pill {
+  border-radius: 50rem;
+}
+
+.btn-group-sm > .btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.btn-group-sm {
+  --bs-btn-padding-y: 0.25rem;
+  --bs-btn-padding-x: 0.5rem;
+  --bs-btn-font-size: 0.875rem;
+  --bs-btn-border-radius: 50rem;
 }
 
 button:focus {
@@ -99,7 +177,7 @@ button:focus {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #f4f4f4;
+  background-color: white;
   padding: 1rem;
 }
 
@@ -122,9 +200,9 @@ button:focus {
 }
 
 .header p {
-  font-size: 1.5rem; /* 원하는 크기로 조정 */
+  font-size: 1.5rem;
   color: black;
-  margin: 0; /* 여백을 없애기 위해 */
+  margin: 0;
 }
 
 /* 요약 섹션 스타일 */
@@ -140,7 +218,7 @@ button:focus {
   border: none;
   cursor: pointer;
   font-size: 16px;
-  padding: 10px; /* 원하는 여백 설정 */
+  padding: 10px;
   background-color: #a7dad0;
   position: relative;
 }
@@ -153,7 +231,7 @@ button:focus {
   background: none;
   display: flex;
   font-size: 16px;
-  padding: 10px; /* 원하는 여백 설정 */
+  padding: 10px;
   background-color: #a7dad0;
 }
 
@@ -168,24 +246,29 @@ button:focus {
 
 /* 트랜잭션 스타일 */
 .transactions {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .transaction {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #ddd;
+  background-color: #f9f9f9;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .transaction-date {
+  background-color: #c9ebe4;
   flex: 1;
+  border-radius: 5px;
 }
 
 .transaction-details {
-  flex: 3;
   display: flex;
   justify-content: space-between;
+}
+.bold-date {
+  font-weight: bold;
 }
 
 .description,
@@ -205,19 +288,21 @@ button:focus {
   font-weight: bold;
 }
 
+/* 플로팅 액션 버튼 스타일 */
 /* 푸터 스타일 */
 .footer {
   background-color: #a7dad0;
   color: #fff;
-  display: flex;
-  justify-content: right;
-  align-items: center;
   padding: 1rem;
+  border-radius: 100px;
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.1rem;
 }
 
 /* 달력 모달 스타일 */
 .modal {
-  display: none; /* 모달 기본적으로 숨김 */
+  display: none;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -293,10 +378,6 @@ button:focus {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 20px;
-  height: 20px;
-  font-size: 10px;
-  border: none;
 }
 
 .input-form {
@@ -356,18 +437,18 @@ button:focus {
 /* 모바일 디바이스 대응을 위한 미디어 쿼리 */
 @media (max-width: 600px) {
   .navbar {
-    flex-direction: row; /* 네비게이션 바를 가로로 유지 */
+    flex-direction: row;
     justify-content: space-between;
   }
 
   .nav-toggle {
-    display: flex; /* 화면이 좁아질 때 햄버거 버튼 보이게 설정 */
+    display: flex;
   }
 
   .nav-links {
     flex-direction: column;
     width: 100%;
-    display: none; /* 기본적으로 네비게이션 링크 숨김 */
+    display: none;
     position: absolute;
     top: 3.5rem;
   }
