@@ -19,12 +19,13 @@ body {
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 375px;
+  height: 812px;
   margin: 0 auto;
   background-color: white;
-  padding: 20px;
+  padding: 0;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  height: 900px;
+  border-radius: 30px;
 }
 
 /* 네비게이션 바 스타일 */
@@ -79,23 +80,38 @@ body {
   margin: 4px 0;
 }
 
-/* 헤더 스타일 */
+/* 버튼 스타일 수정 */
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px; /* 버튼 안의 텍스트 크기 */
+  display: flex;
+  align-items: center; /* 텍스트와 아이콘을 중앙 정렬 */
+}
+
+button:focus {
+  outline: none;
+}
+
+/* 헤더 스타일 수정 */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #f4f4f4;
-  text-align: center;
   padding: 1rem;
 }
 
 .header-left,
 .header-right {
-  flex: 1;
+  display: flex;
+  align-items: center; /* 아이콘과 텍스트를 동일 선상에 정렬 */
 }
 
 .header-center {
-  flex: 2;
+  flex: 1;
+  text-align: center;
 }
 
 .header h1 {
@@ -104,9 +120,9 @@ body {
 }
 
 .header p {
-  display: inline;
-  font-size: 1rem;
+  font-size: 1.5rem; /* 원하는 크기로 조정 */
   color: #666;
+  margin: 0; /* 여백을 없애기 위해 */
 }
 
 /* 요약 섹션 스타일 */
@@ -114,8 +130,34 @@ body {
   display: flex;
   justify-content: space-around;
   margin: 1rem 0;
+  align-items: center;
 }
 
+.summary button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px; /* 원하는 여백 설정 */
+  background-color: #a7dad0;
+  position: relative;
+}
+.income {
+  font-weight: bold;
+  border-right: 10px;
+}
+.totalBalance {
+  font-weight: bold;
+  background: none;
+  display: flex;
+  font-size: 16px;
+  padding: 10px; /* 원하는 여백 설정 */
+  background-color: #a7dad0;
+}
+
+.summary button:focus {
+  outline: none;
+}
 .income,
 .expenses,
 .total {
@@ -152,17 +194,21 @@ body {
 
 .income {
   color: green;
+  font-style: bold;
 }
 
 .expense {
   color: red;
+  font-weight: bold;
 }
 
 /* 푸터 스타일 */
 .footer {
-  background-color: #333;
+  background-color: #a7dad0;
   color: #fff;
-  text-align: center;
+  display: flex;
+  justify-content: right;
+  align-items: center;
   padding: 1rem;
 }
 
@@ -238,16 +284,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-i {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 30px;
-  height: 30px;
-  font-size: 30px;
-  border: none;
 }
 
 .footer i {

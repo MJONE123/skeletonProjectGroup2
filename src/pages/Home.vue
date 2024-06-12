@@ -1,9 +1,29 @@
 <template>
   <div class="container">
-    <div class="btn-group btn-group-lg rounded-pill" style="background-color: #96e8cd">
-      <button type="button" class="btn btn-primary rounded-pill" style="width: 100px; position: relative; left: 0">일일</button>
-      <button type="button" class="btn btn-primary rounded-pill" style="width: 100px; position: absolute; left: 50px">월별</button>
-      <button type="button" class="btn btn-primary rounded-pill" style="width: 100px; position: relative; left: 100px">요약</button>
+    <div class="btn-group btn-group-sm rounded-pill">
+      <button @click="navigate('/Search')">
+        <i class="fa-sharp fa-solid fa-magnifying-glass"></i></button
+      ><button
+        type="button"
+        class="btn btn-primary rounded-pill"
+        style="width: 90px; right: 100px"
+      >
+        일일
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary rounded-pill"
+        style="width: 100px; position: absolute; left: 50px"
+      >
+        월별
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary rounded-pill"
+        style="width: 100px; position: relative; left: 100px"
+      >
+        요약
+      </button>
     </div>
 
     <div class="header">
@@ -22,20 +42,16 @@
     <div class="summary">
       <div>
         <button>
-          수입<span class="income">{{ income }}</span>
+          <span class="income">{{ income }} 수입</span>
         </button>
-        <!-- 수입 <span class="income">{{ income }}</span> -->
       </div>
       <div>
         <button>
           지출<span class="expenses">{{ expenses }}</span>
         </button>
-        <!-- 수입 <span class="income">{{ income }}</span> -->
       </div>
       <div>
         <span class="totalBalance">합계{{ totalBalance }}</span>
-
-        <!-- 수입 <span class="income">{{ income }}</span> -->
       </div>
     </div>
     <div class="transactions">
@@ -65,9 +81,6 @@
       <button @click="navigate('/add')">
         <i class="fa fa-plus"></i>
       </button>
-      <button @click="navigate('/settings')">
-        <i class="fa fa-cog"></i>
-      </button>
     </div>
   </div>
 </template>
@@ -75,7 +88,6 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { useTransactionStore } from '@/stores/transaction';
-import 'font-awesome/css/font-awesome.min.css';
 
 const transactionStore = useTransactionStore();
 
