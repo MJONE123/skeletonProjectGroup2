@@ -1,35 +1,21 @@
 <template>
   <div class="container">
-    <div class="btn-group btn-group-sm rounded-pill">
-      <button
-        type="button"
-        class="btn btn-primary rounded-pill"
-        style="width: 90px; position: fi; right: 100px"
-      >
-        일일
-      </button>
-      <button
-        @click="navigate('/calendar')"
-        type="button"
-        class="btn btn-primary rounded-pill"
-        style="width: 100px; position: absolute; left: 50px"
-      >
-        월별
-      </button>
-      <button
-        type="button"
-        class="btn btn-primary rounded-pill"
-        style="width: 100px; position: relative; left: 100px"
-      >
-        합계
-      </button>
-      <button
-        @click="navigate('/Settings')"
-        type="button"
-        class="btn btn-primary rounded-pill"
-        style="width: 100px; position: fixed; left: 50px"
-      >
-        설정
+    <div class="button-container">
+      <div class="btn-group btn-group-sm rounded-pill">
+        <button type="button" class="btn btn-primary start-btn">일일</button>
+        <router-link to="/calendar" type="button" class="btn btn-primary">
+          월별
+        </router-link>
+        <button
+          @click="routerPush('/chart')"
+          type="button"
+          class="btn btn-primary end-btn"
+        >
+          합계
+        </button>
+      </div>
+      <button @click="routerPush('/Settings')">
+        <i class="bi bi-gear"></i>
       </button>
     </div>
 
@@ -130,17 +116,22 @@ const currentYearMonth = computed(() =>
 );
 
 const prevMonth = () => {
-  currentDate.value.setMonth(currentDate.value.getMonth() - 1);
+  const newDate = new Date(currentDate.value);
+  newDate.setMonth(newDate.getMonth() - 1);
+  currentDate.value = newDate;
 };
 
 const nextMonth = () => {
-  currentDate.value.setMonth(currentDate.value.getMonth() + 1);
+  const newDate = new Date(currentDate.value);
+  newDate.setMonth(newDate.getMonth() + 1);
+  currentDate.value = newDate;
 };
 
 const clickColorChanged = (path) => {
   router.push(path);
 };
-const moveSetting = (path) => {
+
+const routerPush = (path) => {
   router.push(path);
 };
 
