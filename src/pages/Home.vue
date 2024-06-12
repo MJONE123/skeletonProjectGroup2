@@ -4,7 +4,7 @@
       <button
         type="button"
         class="btn btn-primary rounded-pill"
-        style="width: 90px; right: 100px"
+        style="width: 90px; position: fi; right: 100px"
       >
         일일
       </button>
@@ -22,6 +22,14 @@
         style="width: 100px; position: relative; left: 100px"
       >
         합계
+      </button>
+      <button
+        @click="navigate('/Settings')"
+        type="button"
+        class="btn btn-primary rounded-pill"
+        style="width: 100px; position: fixed; left: 50px"
+      >
+        설정
       </button>
     </div>
 
