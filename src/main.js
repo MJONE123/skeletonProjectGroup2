@@ -10,6 +10,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue-3/dist/bootstrap-vue-3.css';
 import '@mdi/font/css/materialdesignicons.css';
 import 'font-awesome/css/font-awesome.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
 import App from './App.vue';
 import router from './router';
 

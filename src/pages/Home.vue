@@ -62,25 +62,31 @@
       </div>
     </div>
     <div class="transactions">
-      <div
-        v-for="transaction in transactions"
-        :key="transaction.id"
-        class="transaction"
-      >
+      <div v-for="(transactions, date) in groupedTransactions" :key="date">
         <div class="transaction-date">
-          {{ formatDate(transaction.date) }}
-        </div>
-        <div class="transaction-details">
-          <div class="description">{{ transaction.description }}</div>
-          <div class="method">{{ transaction.method }}</div>
-          <div
-            :class="{
-              amount: true,
-              income: transaction.amount > 0,
-              expense: transaction.amount < 0,
-            }"
+          <span
+            ><button class="bold-date">
+              {{ formatDateWithoutMonth(date) }} ({{ formatDayOfWeek(date) }})
+            </button></span
           >
-            {{ formatAmount(transaction.amount) }}원
+        </div>
+        <div
+          v-for="transaction in transactions"
+          :key="transaction.id"
+          class="transaction"
+        >
+          <div class="transaction-details">
+            <div class="description">{{ transaction.description }}</div>
+            <div class="method">{{ transaction.method }}</div>
+            <div
+              :class="{
+                amount: true,
+                income: transaction.amount > 0,
+                expense: transaction.amount < 0,
+              }"
+            >
+              {{ formatAmount(transaction.amount) }}원
+            </div>
           </div>
         </div>
       </div>
@@ -109,19 +115,6 @@ const transactionStore = useTransactionStore();
 const currentDate = ref(new Date());
 const showModal = ref(false);
 
-const currentYearMonth = computed(() =>
-  currentDate.value.toLocaleString('default', {
-    month: 'long',
-    year: 'numeric',
-  })
-);
-const prevMonth = () => {
-  currentDate.value.setMonth(currentDate.value.getMonth() - 1);
-};
-const nextMonth = () => {
-  currentDate.value.setMonth(currentDate.value.getMonth() + 1);
-};
-
 const income = computed(() => transactionStore.income.toLocaleString());
 const expenses = computed(() => transactionStore.expenses.toLocaleString());
 const totalBalance = computed(() =>
@@ -129,16 +122,59 @@ const totalBalance = computed(() =>
 );
 const transactions = computed(() => transactionStore.transactions);
 
-const formatDate = (date) => {
+const currentYearMonth = computed(() =>
+  currentDate.value.toLocaleString('default', {
+    month: 'long',
+    year: 'numeric',
+  })
+);
+
+const prevMonth = () => {
+  currentDate.value.setMonth(currentDate.value.getMonth() - 1);
+};
+
+const nextMonth = () => {
+  currentDate.value.setMonth(currentDate.value.getMonth() + 1);
+};
+
+const clickColorChanged = (path) => {
+  router.push(path);
+};
+const moveSetting = (path) => {
+  router.push(path);
+};
+
+const formatDateWithoutMonth = (date) => {
   const [year, month, day] = date.split('-');
-  return `${parseInt(month)}월 ${parseInt(day)}일`;
+  return `${parseInt(day)}일`;
+};
+const formatDayOfWeek = (date) => {
+  const dayOfWeek = new Date(date).getDay();
+  const days = [
+    '일요일',
+    '월요일',
+    '화요일',
+    '수요일',
+    '목요일',
+    '금요일',
+    '토요일',
+  ];
+  return days[dayOfWeek];
 };
 const formatAmount = (amount) => {
   if (!amount) return '';
   return amount.toLocaleString();
 };
-const navigate = (path) => {
-  router.push(path);
-};
+
+const groupedTransactions = computed(() => {
+  return transactions.value.reduce((groups, transaction) => {
+    const date = transaction.date;
+    if (!groups[date]) {
+      groups[date] = [];
+    }
+    groups[date].push(transaction);
+    return groups;
+  }, {});
+});
 </script>
 <style src="@/assets/Home.css"></style>
