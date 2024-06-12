@@ -414,7 +414,8 @@ button:focus {
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-.modal {
+
+.modal2 {
   position: fixed;
   top: 0;
   left: 0;
@@ -432,6 +433,9 @@ button:focus {
   border-radius: 5px;
   max-width: 500px;
   width: 90%;
+}
+
+.addButton {
 }
 
 /* 모바일 디바이스 대응을 위한 미디어 쿼리 */
