@@ -1,21 +1,36 @@
 <template>
   <div class="container">
-    <div class="button-container">
-      <div class="btn-group btn-group-sm rounded-pill">
-        <button type="button" class="btn btn-primary start-btn">일일</button>
-        <button
-          @click="clickColorChanged('/calendar')"
-          type="button"
-          class="btn btn-primary"
-        >
-          월별
-        </button>
-        <button type="button" class="btn btn-primary end-btn">합계</button>
-
-        <button @click="moveSetting('/Settings')">
-          <i class="bi bi-gear"></i>
-        </button>
-      </div>
+    <div class="btn-group btn-group-sm rounded-pill">
+      <button
+        type="button"
+        class="btn btn-primary rounded-pill"
+        style="width: 90px; position: fi; right: 100px"
+      >
+        일일
+      </button>
+      <button
+        @click="navigate('/calendar')"
+        type="button"
+        class="btn btn-primary rounded-pill"
+        style="width: 100px; position: absolute; left: 50px"
+      >
+        월별
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary rounded-pill"
+        style="width: 100px; position: relative; left: 100px"
+      >
+        합계
+      </button>
+      <button
+        @click="navigate('/Settings')"
+        type="button"
+        class="btn btn-primary rounded-pill"
+        style="width: 100px; position: fixed; left: 50px"
+      >
+        설정
+      </button>
     </div>
 
     <div class="header">
