@@ -91,6 +91,7 @@ const submitTransaction = () => {
   amount.value = 0;
   category.value = '';
   description.value = '';
+
   closeModal();
   // Emit close event to close the modal
 };
