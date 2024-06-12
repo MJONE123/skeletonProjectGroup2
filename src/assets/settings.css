@@ -20,6 +20,15 @@
   align-items: center; /* 수직 가운데 정렬 */
 }
 
+.arrow_go_back {
+  position: absolute;
+  left: 40px; /* 오른쪽 끝으로 정렬 */
+  font-size: 24px;
+  color: #111111;
+  cursor: pointer;
+  font-size: 35px;
+}
+
 /* 설정, 이름에 적용할 스타일 */
 .bold_text {
   font-family: 'Mukta';
@@ -49,12 +58,24 @@
 }
 
 .text {
-  position: absolute;
+  display: flex;
+  position: relative;
+  align-items: center;
+  width: 100%;
   color: black;
   font-size: 16px;
   font-family: Inter;
   font-weight: 500;
   word-wrap: break-word;
+}
+
+/* text 옆쪽에 올 화살표 스타일 지정 */
+.arrow_next_text {
+  position: absolute;
+  right: 60px; /* 오른쪽 끝으로 정렬 */
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 35px;
 }
 
 .rotated {
@@ -69,11 +90,12 @@
 /* 프로필 이미지 css */
 
 .ellipse {
-  border-radius: 9999px;
+  border-radius: 50%;
   position: absolute;
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.06);
-  top: 108px;
-  left: 64px;
+  top: 95px;
+  left: 50%;
+  transform: translateX(-50%); /* 수정: 가운데 정렬을 위해 추가 */
   width: 248px;
   height: 248px;
   background: #dbdbdb url('아직안정해진이미지.jpg') center/cover;
@@ -87,12 +109,13 @@
   font-weight: 600;
   line-height: 20.52px;
   word-wrap: break-word;
+  text-align: center;
 }
 
 /* 메뉴 그룹 설정 */
 .group1 {
   position: absolute;
-  top: 475px;
+  top: 440px;
   left: 0px;
   width: 376px;
   height: 65px;
@@ -100,7 +123,7 @@
 }
 .group2 {
   position: absolute;
-  top: 537px;
+  top: 502px;
   left: 0px;
   width: 376px;
   height: 65px;
@@ -110,7 +133,7 @@
 
 .group3 {
   position: absolute;
-  top: 647px;
+  top: 612px;
   left: 0px;
   width: 376px;
   height: 65px;
@@ -118,7 +141,7 @@
 }
 .group4 {
   position: absolute;
-  top: 712px;
+  top: 677px;
   left: -1px;
   width: 376px;
   height: 65px;
@@ -127,7 +150,7 @@
 
 .group5 {
   position: absolute;
-  top: 777px;
+  top: 742px;
   left: -1px;
   width: 376px;
   height: 65px;
