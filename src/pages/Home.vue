@@ -116,14 +116,10 @@ const currentYearMonth = computed(() =>
   })
 );
 const prevMonth = () => {
-  const prevDate = new Date(currentDate.value);
-  prevDate.setMonth(prevDate.getMonth() - 1);
-  currentDate.value = prevDate;
+  currentDate.value.setMonth(currentDate.value.getMonth() - 1);
 };
 const nextMonth = () => {
-  const nextDate = new Date(currentDate.value);
-  nextDate.setMonth(nextDate.getMonth() + 1);
-  currentDate.value = nextDate;
+  currentDate.value.setMonth(currentDate.value.getMonth() + 1);
 };
 
 const income = computed(() => transactionStore.income.toLocaleString());

@@ -76,7 +76,6 @@ const submitTransaction = () => {
     alert('내용을 기입해주세요.');
     return;
   }
-
   const transaction = {
     type: type.value,
     date: date.value,
