@@ -193,11 +193,12 @@ button:focus {
 }
 
 .income {
-  color: green;
+  color: blue;
   font-style: bold;
 }
 
-.expense {
+.expense,
+.expenses {
   color: red;
   font-weight: bold;
 }
@@ -296,6 +297,61 @@ button:focus {
   border: none;
 }
 
+.input-form {
+  padding: 20px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+}
+.input-header {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+.input-header button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ccc;
+  cursor: pointer;
+}
+.input-header button.active {
+  background-color: #007bff;
+  color: white;
+}
+.input-fields div {
+  margin-bottom: 15px;
+}
+.input-fields label {
+  display: block;
+  margin-bottom: 5px;
+}
+.input-fields input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.modal2 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 500px;
+  width: 90%;
+}
+.addButton {
+}
 /* 모바일 디바이스 대응을 위한 미디어 쿼리 */
 @media (max-width: 600px) {
   .navbar {
