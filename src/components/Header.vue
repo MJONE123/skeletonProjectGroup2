@@ -3,11 +3,12 @@
     <div class="header_bar">
       <div class="btn_group_container">
         <div class="btn_group">
-          <button class="btn left" @click="view = 'daily'" :class="{ active: view === 'daily' }">일일</button>
-          <button class="btn middle" @click="view = 'monthly'" :class="{ active: view === 'monthly' }">월별</button>
-          <button class="btn right" @click="view = 'summary'" :class="{ active: view === 'summary' }">요약</button>
+          <router-link to="/" class="btn left" :class="{ active: view === 'daily' }">일일</router-link>
+          <router-link to="/cal" class="btn middle" :class="{ active: view === 'monthly' }">월별</router-link>
+          <router-link to="/chart" class="btn right" :class="{ active: view === 'summary' }">합계</router-link>
         </div>
       </div>
+
       <router-link to="/settings" class="settings_icon">
         <i class="bi bi-gear-fill"></i>
       </router-link>
@@ -17,8 +18,25 @@
 
 <script setup>
 import { ref } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 
-const view = ref('monthly'); // 반응형 데이터로 'monthly'를 기본값으로 설정
+const route = ref('monthly'); // 반응형 데이터로 'monthly'를 기본값으로 설정
+const router = useRouter();
+const view = ref(route.path === '/' ? 'daily' : route.path === '/cal' ? 'monthly' : 'summary');
+
+function navigate(viewName) {
+  view.value = viewName;
+  if (viewName === 'daily') {
+    // 일일 페이지로 이동
+    router.push('/');
+  } else if (viewName === 'monthly') {
+    // 월별 페이지로 이동
+    router.push('/cal');
+  } else if (viewName === 'summary') {
+    // 요약 페이지로 이동
+    router.push('/chart');
+  }
+}
 </script>
 
 <style scoped>
@@ -38,6 +56,7 @@ header {
   width: 100%; /* 헤더 바의 너비를 100%로 설정 */
   justify-content: space-between; /* 아이템들을 양쪽 끝으로 정렬 */
 }
+
 .btn_group_container {
   display: flex;
   justify-content: center; /* btn_group을 가운데 정렬 */
@@ -80,7 +99,7 @@ header {
   color: black; /* 아이콘 색상 */
   cursor: pointer;
   position: absolute;
-  right: 15px; /* 오른쪽에 위치 */
+  right: 25px; /* 오른쪽에 위치 */
 }
 
 /* .btn_group button:hover {
