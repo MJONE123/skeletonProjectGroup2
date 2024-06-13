@@ -17,23 +17,24 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watchEffect } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 
-const route = ref('monthly'); // 반응형 데이터로 'monthly'를 기본값으로 설정
+// const route = ref('monthly'); // 반응형 데이터로 'monthly'를 기본값으로 설정
 const router = useRouter();
-const view = ref(route.path === '/' ? 'daily' : route.path === '/cal' ? 'monthly' : 'summary');
+const route = useRoute();
+const view = ref(route.path === '/' ? 'daily' : route.path === '/cal' ? 'monthly' : route.path === '/chart' ? 'summary' : '');
+
+watchEffect(() => {
+  view.value = route.path === '/' ? 'daily' : route.path === '/cal' ? 'monthly' : route.path === '/chart' ? 'summary' : '';
+});
 
 function navigate(viewName) {
-  view.value = viewName;
   if (viewName === 'daily') {
-    // 일일 페이지로 이동
     router.push('/');
   } else if (viewName === 'monthly') {
-    // 월별 페이지로 이동
     router.push('/cal');
   } else if (viewName === 'summary') {
-    // 요약 페이지로 이동
     router.push('/chart');
   }
 }
@@ -71,7 +72,7 @@ header {
   border-radius: 25px; /* 전체 그룹의 모서리를 둥글게 */
 }
 
-.btn_group button {
+.btn_group .btn {
   flex: 1;
   margin: 0;
   padding: 10px 0;
@@ -87,7 +88,7 @@ header {
   transition: background-color 0.3s; /* 배경색 변경 애니메이션 */
 }
 
-.btn_group button.active {
+.btn_group .btn.active {
   background-color: #96e8cd; /* 활성화된 버튼 배경색 */
   font-weight: bold;
   z-index: 2; /* 활성화된 버튼을 위로 올림 */

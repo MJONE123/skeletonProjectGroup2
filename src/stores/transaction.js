@@ -11,9 +11,7 @@ export const useTransactionStore = defineStore('transaction', () => {
   });
   async function fetchIncomeData() {
     try {
-      const fetchIncomeDataRes = await axios.get(
-        'http://localhost:3000/income'
-      );
+      const fetchIncomeDataRes = await axios.get('http://localhost:3000/income');
       state.income = fetchIncomeDataRes.data;
       console.log(fetchIncomeDataRes.data);
     } catch (error) {
@@ -61,10 +59,7 @@ export const useTransactionStore = defineStore('transaction', () => {
     const year = date.getFullYear();
     return transactions.value.filter((transaction) => {
       const transactionDate = new Date(transaction.date);
-      return (
-        transactionDate.getMonth() === month &&
-        transactionDate.getFullYear() === year
-      );
+      return transactionDate.getMonth() === month && transactionDate.getFullYear() === year;
     });
   };
 
