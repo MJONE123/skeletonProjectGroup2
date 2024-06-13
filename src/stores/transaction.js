@@ -8,18 +8,42 @@ export const useTransactionStore = defineStore('transaction', () => {
   const state = reactive({
     income: [],
     expense: [],
+    totalIncome: 0,
+    totalExpense: 0,
   });
-  async function fetchIncomeData() {
+
+  async function fetchTransactions() {
     try {
-      const fetchIncomeDataRes = await axios.get('http://localhost:3000/income');
-      state.income = fetchIncomeDataRes.data;
-      console.log(fetchIncomeDataRes.data);
+      const incomeRes = await axios.get('http://localhost:3000/income');
+      const expenseRes = await axios.get('http://localhost:3000/expense');
+      state.income = incomeRes.data;
+      state.expense = expenseRes.data;
+
+      state.totalIncome = state.income.reduce((acc, cur) => (acc += parseInt(cur.amount)), 0);
+      state.totalExpense = state.expense.reduce((acc, cur) => (acc += parseInt(cur.amount)), 0);
+
+      console.log(totalIncome.value);
     } catch (error) {
-      alert('TodoList 데이터 통신 Err 발생');
-      console.log(error);
+      alert('데이터 통신 오류 발생');
+      console.error(error);
     }
   }
-  fetchIncomeData();
+  fetchTransactions();
+
+  const account = computed(() => [...state.income, ...state.expense]);
+
+  // const totalIncome = computed(() =>
+  //   state.income.reduce((sum, item) => {
+  //     console.log(item);
+  //     sum + Number(item.amount);
+  //   }, 0)
+  // );
+  // console.log(totalIncome.value);
+
+  // const totalExpense = computed(() => state.expense.reduce((sum, item) => sum + Number(item.amount), 0));
+
+  // const balance = computed(() => totalIncome.value - totalExpense.value);
+  // console.log(state);
 
   const transactions = ref([
     {
@@ -79,21 +103,40 @@ export const useTransactionStore = defineStore('transaction', () => {
     return getIncomeForMonth(date) + getExpensesForMonth(date);
   };
 
-  function addTransaction(transaction) {
-    transactions.value.push(transaction);
-    if (transaction.amount > 0) {
-      income.value += transaction.amount;
-    } else {
-      expenses.value -= transaction.amount;
+  async function addIncomeTransaction(transaction) {
+    try {
+      const addResponse = await axios.post('http://localhost:3000/income', transaction);
+
+      if (addResponse.status !== 201) return alert('데이터 전송 실패');
+    } catch (error) {
+      alert('데이터 통신 오류 발생');
+      console.error(error);
     }
   }
+
+  async function addExpenseTransaction(transaction) {
+    try {
+      const addResponse = await axios.post('http://localhost:3000/expense', transaction);
+
+      if (addResponse.status !== 201) return alert('데이터 전송 실패');
+    } catch (error) {
+      alert('데이터 통신 오류 발생');
+      console.error(error);
+    }
+  }
+
+  const totalIncome = computed(() => state.totalIncome);
+  const totalExpense = computed(() => state.totalExpense);
 
   return {
     income,
     expenses,
     transactions,
     totalBalance,
-    addTransaction,
+    totalIncome,
+    totalExpense,
+    addIncomeTransaction,
+    addExpenseTransaction,
     getTransactionsForMonth,
     getIncomeForMonth,
     getExpensesForMonth,

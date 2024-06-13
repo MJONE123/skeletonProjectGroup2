@@ -27,6 +27,30 @@
       "category": "용돈",
       "amount": "10000000",
       "content": "코인 대박"
+    },
+    {
+      "id": "233e",
+      "type": "income",
+      "date": "2024-06-12",
+      "amount": 10000,
+      "category": "식비",
+      "description": "33333"
+    },
+    {
+      "id": "bf34",
+      "type": "income",
+      "date": "2024-06-05",
+      "amount": 10000,
+      "category": "교통비",
+      "description": "####"
+    },
+    {
+      "id": "ce7e",
+      "type": "income",
+      "date": "2024-06-17",
+      "amount": 10000,
+      "category": "기타",
+      "description": "1234"
     }
   ],
   "incomeCategory": [
@@ -35,10 +59,12 @@
       "id": "63fd"
     },
     {
-      "name": "용돈"
+      "name": "용돈",
+      "id": "79f9"
     },
     {
-      "name": "기타"
+      "name": "기타",
+      "id": "a081"
     }
   ],
   "expense": [
@@ -76,6 +102,14 @@
       "category": "교통비",
       "amount": "10000",
       "content": "카카오택시"
+    },
+    {
+      "id": "4cf3",
+      "type": "expense",
+      "date": "2024-06-11",
+      "amount": 321,
+      "category": "식비",
+      "description": "3333"
     }
   ],
   "expenseCategory": [
