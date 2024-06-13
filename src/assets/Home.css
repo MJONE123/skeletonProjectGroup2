@@ -814,7 +814,7 @@ button:focus {
   justify-content: center;
   align-items: center;
 }
-
+/* 여기부터는 인풋 모달창 */
 .input-form {
   padding: 20px;
   background-color: #f0f0f0;
@@ -830,6 +830,10 @@ button:focus {
   border: none;
   border-radius: 5px;
   background-color: #ccc;
+  cursor: pointer;
+}
+.input-header button:hover {
+  background-color: #a7dad0;
   cursor: pointer;
 }
 .input-header button.active {
@@ -849,17 +853,17 @@ button:focus {
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-
+/* +버튼을 눌렀을 때 생기는 입력 모달 창 */
 .modal {
+  display: flex; /* 모달이 제대로 표시되도록 flex 설정 */
+  justify-content: center;
+  align-items: center;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
   z-index: 1000;
 }
 .modal-content {
@@ -869,6 +873,44 @@ button:focus {
   max-width: 500px;
   width: 90%;
 }
+.input-fields input,
+.input-fields select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
+}
+
+.input-fields div {
+  margin-bottom: 15px;
+}
+
+.input-fields label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.addButton {
+  display: flex;
+  justify-content: space-between; /* 저장 버튼과 닫기 버튼을 좌우로 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
+  margin-top: 20px;
+}
+
+.addButton button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.addButton button:hover {
+  background-color: #a7dad0;
+}
+
 /* 모바일 디바이스 대응을 위한 미디어 쿼리 */
 @media (max-width: 600px) {
   .navbar {
