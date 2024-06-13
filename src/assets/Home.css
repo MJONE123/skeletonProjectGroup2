@@ -1,5 +1,4 @@
-기본 스타일 설정
-* {
+기본 스타일 설정 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -173,7 +172,25 @@ button:focus {
 }
 
 /* 헤더 스타일 수정 */
-.header {
+.home_header {
+  display: flex;
+  height: 80px;
+  font-size: 18px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px 0 20px;
+}
+
+.header-center {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.mdi {
+  font-size: 35px;
+}
+
+/* .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -203,7 +220,7 @@ button:focus {
   font-size: 1.5rem;
   color: black;
   margin: 0;
-}
+} */
 
 /* 요약 섹션 스타일 */
 .summary {
