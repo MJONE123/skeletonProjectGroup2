@@ -34,7 +34,7 @@
       </div>
     </div>
 
-    <div class="summary">
+    <!-- <div class="summary">
       <div>
         <button>
           수입<span class="income">{{ income }}원 </span>
@@ -48,7 +48,8 @@
       <div>
         <span class="totalBalance">합계{{ totalBalance }}원</span>
       </div>
-    </div>
+    </div> -->
+    <SummaryStats :income="totalIncome" :expense="totalExpense" :filters="filters" />
     <div class="transactions">
       <div v-for="(transactions, date) in groupedTransactions" :key="date">
         <div class="transaction-date">
@@ -92,29 +93,28 @@ import { useTransactionStore } from '@/stores/transaction';
 import { useRouter } from 'vue-router';
 import AddTransaction from './AddTransaction.vue';
 import Header from '@/components/Header.vue'; // Header 컴포넌트 가져오기
+import SummaryStats from '@/components/SummaryStats.vue'; // SummaryStats 컴포넌트 가져오기
 
 const router = useRouter();
 const transactionStore = useTransactionStore();
 const currentDate = ref(new Date());
 const showModal = ref(false);
+const filters = ref({
+  showIncome: true,
+  showExpense: true,
+  showBalance: true,
+});
 
 function modalHandler(data) {
   showModal.value = data;
 }
 
-const income = computed(() =>
-  transactionStore.getIncomeForMonth(currentDate.value).toLocaleString()
-);
-const expenses = computed(() =>
-  transactionStore.getExpensesForMonth(currentDate.value).toLocaleString()
-);
-const totalBalance = computed(() =>
-  transactionStore.getTotalBalanceForMonth(currentDate.value).toLocaleString()
-);
-const transactions = computed(() =>
-  transactionStore.getTransactionsForMonth(currentDate.value)
-);
-
+const totalIncome = computed(() => transactionStore.totalIncome);
+const totalExpense = computed(() => transactionStore.totalExpense);
+const income = computed(() => transactionStore.getIncomeForMonth(currentDate.value).toLocaleString());
+const expenses = computed(() => transactionStore.getExpensesForMonth(currentDate.value).toLocaleString());
+const totalBalance = computed(() => transactionStore.getTotalBalanceForMonth(currentDate.value).toLocaleString());
+const transactions = computed(() => transactionStore.getTransactionsForMonth(currentDate.value));
 
 const currentYearMonth = computed(() =>
   currentDate.value.toLocaleString('default', {

@@ -2,21 +2,9 @@
   <!-- 수입/지출/이체 분류 -->
   <div class="input-form">
     <div class="input-header">
-      <button @click="setType('income')" :class="{ active: type === 'income' }">
-        수입
-      </button>
-      <button
-        @click="setType('expense')"
-        :class="{ active: type === 'expense' }"
-      >
-        지출
-      </button>
-      <button
-        @click="setType('transfer')"
-        :class="{ active: type === 'transfer' }"
-      >
-        이체
-      </button>
+      <button @click="setType('income')" :class="{ active: type === 'income' }">수입</button>
+      <button @click="setType('expense')" :class="{ active: type === 'expense' }">지출</button>
+      <button @click="setType('transfer')" :class="{ active: type === 'transfer' }">이체</button>
     </div>
 
     <!-- 내역 input -->
@@ -65,6 +53,7 @@ const description = ref('');
 const showModal = ref(false); // 모달을 처음에 보여주도록 설정
 
 const setType = (newType) => {
+  // console.log(newType);
   type.value = newType;
 };
 
@@ -94,9 +83,14 @@ const submitTransaction = () => {
     category: category.value,
     description: description.value,
   };
-  console.log(transaction);
 
-  transactionStore.addTransaction(transaction);
+  console.log(type.value);
+
+  if (type.value === 'income') {
+    transactionStore.addIncomeTransaction(transaction);
+  } else {
+    transactionStore.addExpenseTransaction(transaction);
+  }
 
   // Clear the form fields after submission
   date.value = '';
