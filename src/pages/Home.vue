@@ -84,7 +84,7 @@
     <!-- 모달 창 -->
     <div v-if="showModal" class="modal">
       <div class="modal-content">
-        <AddTransaction @close="showModal = false" />
+        <AddTransaction @close="modalHandler" />
       </div>
     </div>
   </div>
@@ -100,6 +100,10 @@ const router = useRouter();
 const transactionStore = useTransactionStore();
 const currentDate = ref(new Date());
 const showModal = ref(false);
+
+function modalHandler(data) {
+  showModal.value = data;
+}
 
 const income = computed(() =>
   transactionStore.getIncomeForMonth(currentDate.value).toLocaleString()
