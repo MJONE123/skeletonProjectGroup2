@@ -1,19 +1,10 @@
 <template>
-  <div class="calendar-container">
-    <h2>달력</h2>
-    <!-- 간단한 달력 표시 -->
-    <p>여기에서 날짜를 선택하세요.</p>
+  <div>
+    <Cal />
   </div>
 </template>
 
-<script>
-export default {
-  name: 'Calendar',
-};
+<script setup>
+import { ref } from 'vue';
+import Cal from '@/components/Cal.vue'; // Cal 컴포넌트 가져오기
 </script>
-
-<style scoped>
-.calendar-container {
-  padding: 20px;
-}
-</style>
