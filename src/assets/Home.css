@@ -1,5 +1,4 @@
-기본 스타일 설정
-* {
+기본 스타일 설정 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -173,7 +172,25 @@ button:focus {
 }
 
 /* 헤더 스타일 수정 */
-.header {
+.home_header {
+  display: flex;
+  height: 80px;
+  font-size: 18px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px 0 20px;
+}
+
+.header-center {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.mdi {
+  font-size: 35px;
+}
+
+/* .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -203,7 +220,7 @@ button:focus {
   font-size: 1.5rem;
   color: black;
   margin: 0;
-}
+} */
 
 /* 요약 섹션 스타일 */
 .summary {
@@ -923,7 +940,7 @@ button:focus {
 
 .addButton {
   display: flex;
-  justify-content: space-between; /* 저장 버튼과 닫기 버튼을 좌우로 정렬 */
+  justify-content: flex-end;
   align-items: center; /* 세로 중앙 정렬 */
   margin-top: 20px;
 }
@@ -931,14 +948,16 @@ button:focus {
 .addButton button {
   padding: 10px 20px;
   border: none;
-  border-radius: 5px;
-  background-color: #007bff;
-  color: white;
+  border-radius: 15px;
+  background-color: #eeeeee;
+  color: #111111;
   cursor: pointer;
+  margin-left: 10px;
 }
 
 .addButton button:hover {
-  background-color: #a7dad0;
+  background-color: #96e8cd;
+  color: #111111;
 }
 
 /* 모바일 디바이스 대응을 위한 미디어 쿼리 */

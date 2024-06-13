@@ -20,7 +20,22 @@
     </div> -->
     <Header />
 
-    <div class="header">
+    <!-- 월 변경 바 -->
+    <div class="home_header">
+      <button @click="prevMonth">
+        <i class="mdi mdi-chevron-left"></i>
+      </button>
+
+      <div class="header-center">
+        {{ currentYearMonth }}
+      </div>
+
+      <button @click="nextMonth">
+        <i class="mdi mdi-chevron-right"></i>
+      </button>
+    </div>
+
+    <!-- <div class="header">
       <div class="header-left">
         <button @click="prevMonth"><i class="mdi mdi-chevron-left"></i></button>
       </div>
@@ -32,32 +47,28 @@
           <i class="mdi mdi-chevron-right"></i>
         </button>
       </div>
-    </div>
-
-    <!-- <div class="summary">
-      <div>
-        <button>
-          수입<span class="income">{{ income }}원 </span>
-        </button>
-      </div>
-      <div>
-        <button>
-          지출<span class="expenses">{{ expenses }}원</span>
-        </button>
-      </div>
-      <div>
-        <span class="totalBalance">합계{{ totalBalance }}원</span>
-      </div>
     </div> -->
-    <SummaryStats :income="totalIncome" :expense="totalExpense" :filters="filters" />
+
+    <!-- 요약 -->
+    <SummaryStats
+      :income="totalIncome"
+      :expense="totalExpense"
+      :filters="filters"
+    />
     <div class="transactions">
       <div v-for="(transactions, date) in groupedTransactions" :key="date">
         <div class="transaction-date">
           <span
-            ><button class="bold-date">{{ formatDateWithoutMonth(date) }} ({{ formatDayOfWeek(date) }})</button></span
+            ><button class="bold-date">
+              {{ formatDateWithoutMonth(date) }} ({{ formatDayOfWeek(date) }})
+            </button></span
           >
         </div>
-        <div v-for="transaction in transactions" :key="transaction.id" class="transaction">
+        <div
+          v-for="transaction in transactions"
+          :key="transaction.id"
+          class="transaction"
+        >
           <div class="transaction-details">
             <div class="description">{{ transaction.description }}</div>
             <div class="method">{{ transaction.method }}</div>
@@ -77,6 +88,21 @@
     <div class="footer">
       <button @click="showModal = true"><i class="fa fa-plus"></i></button>
     </div>
+    <!-- <div class="summary">
+      <div>
+        <button>
+          수입<span class="income">{{ income }}원 </span>
+        </button>
+      </div>
+      <div>
+        <button>
+          지출<span class="expenses">{{ expenses }}원</span>
+        </button>
+      </div>
+      <div>
+        <span class="totalBalance">합계{{ totalBalance }}원</span>
+      </div>
+    </div> -->
 
     <!-- 모달 창 -->
     <div v-if="showModal" class="modal">
@@ -111,10 +137,18 @@ function modalHandler(data) {
 
 const totalIncome = computed(() => transactionStore.totalIncome);
 const totalExpense = computed(() => transactionStore.totalExpense);
-const income = computed(() => transactionStore.getIncomeForMonth(currentDate.value).toLocaleString());
-const expenses = computed(() => transactionStore.getExpensesForMonth(currentDate.value).toLocaleString());
-const totalBalance = computed(() => transactionStore.getTotalBalanceForMonth(currentDate.value).toLocaleString());
-const transactions = computed(() => transactionStore.getTransactionsForMonth(currentDate.value));
+const income = computed(() =>
+  transactionStore.getIncomeForMonth(currentDate.value).toLocaleString()
+);
+const expenses = computed(() =>
+  transactionStore.getExpensesForMonth(currentDate.value).toLocaleString()
+);
+const totalBalance = computed(() =>
+  transactionStore.getTotalBalanceForMonth(currentDate.value).toLocaleString()
+);
+const transactions = computed(() =>
+  transactionStore.getTransactionsForMonth(currentDate.value)
+);
 
 const currentYearMonth = computed(() =>
   currentDate.value.toLocaleString('default', {
@@ -146,7 +180,15 @@ const formatDateWithoutMonth = (date) => {
 
 const formatDayOfWeek = (date) => {
   const dayOfWeek = new Date(date).getDay();
-  const days = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
+  const days = [
+    '일요일',
+    '월요일',
+    '화요일',
+    '수요일',
+    '목요일',
+    '금요일',
+    '토요일',
+  ];
   return days[dayOfWeek];
 };
 
