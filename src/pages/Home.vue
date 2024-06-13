@@ -80,7 +80,7 @@
     <!-- 모달 창 -->
     <div v-if="showModal" class="modal">
       <div class="modal-content">
-        <AddTransaction @close="showModal = false" />
+        <AddTransaction @close="modalHandler" />
       </div>
     </div>
   </div>
@@ -98,10 +98,23 @@ const transactionStore = useTransactionStore();
 const currentDate = ref(new Date());
 const showModal = ref(false);
 
-const income = computed(() => transactionStore.getIncomeForMonth(currentDate.value).toLocaleString());
-const expenses = computed(() => transactionStore.getExpensesForMonth(currentDate.value).toLocaleString());
-const totalBalance = computed(() => transactionStore.getTotalBalanceForMonth(currentDate.value).toLocaleString());
-const transactions = computed(() => transactionStore.getTransactionsForMonth(currentDate.value));
+function modalHandler(data) {
+  showModal.value = data;
+}
+
+const income = computed(() =>
+  transactionStore.getIncomeForMonth(currentDate.value).toLocaleString()
+);
+const expenses = computed(() =>
+  transactionStore.getExpensesForMonth(currentDate.value).toLocaleString()
+);
+const totalBalance = computed(() =>
+  transactionStore.getTotalBalanceForMonth(currentDate.value).toLocaleString()
+);
+const transactions = computed(() =>
+  transactionStore.getTransactionsForMonth(currentDate.value)
+);
+
 
 const currentYearMonth = computed(() =>
   currentDate.value.toLocaleString('default', {
