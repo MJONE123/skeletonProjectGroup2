@@ -157,6 +157,9 @@ updateCalendar(year.value, month.value); // 초기 달력 설정
 .container {
   max-width: 375px;
   margin: 0 auto; /* 가운데 정렬 */
+  height: 100vh; /* 화면 전체 높이를 차지 */
+  display: flex;
+  flex-direction: column;
 }
 .calendar_header {
   display: flex;
@@ -200,6 +203,7 @@ updateCalendar(year.value, month.value); // 초기 달력 설정
 .grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
+  flex-grow: 1;
 }
 
 .day {
@@ -207,9 +211,10 @@ updateCalendar(year.value, month.value); // 초기 달력 설정
   border: 1px solid #ccc;
   padding: 5px;
   text-align: center;
-  height: 80px;
+  
   font-weight: bold;
   position: relative; /* 부모 요소를 기준으로 자식 요소를 배치 */
+  
 }
 
 .date {
