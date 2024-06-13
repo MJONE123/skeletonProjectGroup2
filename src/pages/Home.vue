@@ -28,7 +28,7 @@
         </button>
       </div>
       <div>
-        <span class="totalBalance">합계{{ totalBalance }}원</span>
+        <span class="totalBalance">합계{{ computedTotalBalance }}원</span>
       </div>
     </div>
 
@@ -161,6 +161,16 @@ const groupedTransactions = computed(() => {
     groups[date].push(transaction);
     return groups;
   }, {});
+});
+const computedTotalBalance = computed(() => {
+  let total = 0;
+  transactions.value.forEach((transaction) => {
+    total +=
+      transaction.type === 'income'
+        ? transaction.amount
+        : -Math.abs(transaction.amount);
+  });
+  return total.toLocaleString();
 });
 </script>
 
