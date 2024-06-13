@@ -174,7 +174,7 @@ updateCalendar(year.value, month.value); // 초기 달력 설정
 .days_of_week {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  font-size: 10px;
+  font-size: 12px;
   height: 30px;
   text-align: center;
 }
