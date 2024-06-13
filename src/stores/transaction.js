@@ -20,51 +20,46 @@ export const useTransactionStore = defineStore('transaction', () => {
       state.totalExpense = state.expense.reduce((acc, cur) => (acc += parseInt(cur.amount)), 0);
       console.log(totalIncome.value);
     } catch (error) {
-      alert('데이터 통신 오류 발생');
-      console.error(error);
+      alert('TodoList 데이터 통신 Err 발생');
+      console.log(error);
     }
   }
-  fetchTransactions();
-  const account = computed(() => [...state.income, ...state.expense]);
-  // const totalIncome = computed(() =>
-  //   state.income.reduce((sum, item) => {
-  //     console.log(item);
-  //     sum + Number(item.amount);
-  //   }, 0)
-  // );
-  // console.log(totalIncome.value);
-  // const totalExpense = computed(() => state.expense.reduce((sum, item) => sum + Number(item.amount), 0));
-  // const balance = computed(() => totalIncome.value - totalExpense.value);
-  // console.log(state);
+
+  fetchIncomeData();
+
   const transactions = ref([
-    {
-      id: 1,
-      date: '2024-06-10',
-      description: '서브웨이',
-      method: '카드',
-      amount: -30000,
-    },
-    {
-      id: 2,
-      date: '2024-06-10',
-      description: '용돈',
-      method: '현금',
-      amount: 50000,
-    },
-    {
-      id: 3,
-      date: '2024-06-07',
-      description: '용돈',
-      method: '현금',
-      amount: 50000,
-    },
-    {
-      id: 4,
-      date: '2024-06-07',
-      description: '용돈',
-      method: '현금',
-      amount: 50000,
-    },
+    // {
+    //   id: 1,
+    //   date: '2024-06-10',
+    //   description: '서브웨이',
+    //   method: '카드',
+    //   amount: -30000,
+    //   type: 'expense',
+    // },
+    // {
+    //   id: 2,
+    //   date: '2024-06-10',
+    //   description: '용돈',
+    //   method: '현금',
+    //   amount: 50000,
+    //   type: 'income',
+    // },
+    // {
+    //   id: 3,
+    //   date: '2024-06-07',
+    //   description: '용돈',
+    //   method: '현금',
+    //   amount: 50000,
+    //   type: 'income',
+    // },
+    // {
+    //   id: 4,
+    //   date: '2024-06-07',
+    //   description: '용돈',
+    //   method: '현금',
+    //   amount: 50000,
+    //   type: 'income',
+    // },
   ]);
   const totalBalance = computed(() => income.value - expenses.value);
   const getTransactionsForMonth = (date) => {
@@ -72,7 +67,10 @@ export const useTransactionStore = defineStore('transaction', () => {
     const year = date.getFullYear();
     return transactions.value.filter((transaction) => {
       const transactionDate = new Date(transaction.date);
-      return transactionDate.getMonth() === month && transactionDate.getFullYear() === year;
+      return (
+        transactionDate.getMonth() === month &&
+        transactionDate.getFullYear() === year
+      );
     });
   };
   const getIncomeForMonth = (date) => {
@@ -88,6 +86,7 @@ export const useTransactionStore = defineStore('transaction', () => {
   const getTotalBalanceForMonth = (date) => {
     return getIncomeForMonth(date) + getExpensesForMonth(date);
   };
+
   async function addIncomeTransaction(transaction) {
     try {
       const addResponse = await axios.post('http://localhost:3000/income', transaction);
@@ -111,16 +110,14 @@ export const useTransactionStore = defineStore('transaction', () => {
   const total = computed(() => state.total);
   const totalIncome = computed(() => state.totalIncome);
   const totalExpense = computed(() => state.totalExpense);
+
   return {
     income,
     expense,
     total,
     transactions,
     totalBalance,
-    totalIncome,
-    totalExpense,
-    addIncomeTransaction,
-    addExpenseTransaction,
+    addTransaction,
     getTransactionsForMonth,
     getIncomeForMonth,
     getExpensesForMonth,

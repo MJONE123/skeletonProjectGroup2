@@ -1,4 +1,5 @@
-기본 스타일 설정 * {
+/* 기본 스타일 설정 */
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -172,25 +173,7 @@ button:focus {
 }
 
 /* 헤더 스타일 수정 */
-.home_header {
-  display: flex;
-  height: 80px;
-  font-size: 18px;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px 0 20px;
-}
-
-.header-center {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.mdi {
-  font-size: 35px;
-}
-
-/* .header {
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -220,7 +203,7 @@ button:focus {
   font-size: 1.5rem;
   color: black;
   margin: 0;
-} */
+}
 
 /* 요약 섹션 스타일 */
 .summary {
@@ -260,11 +243,17 @@ button:focus {
 .total {
   font-weight: bold;
 }
+.expense-category {
+  color: red; /* 빨간색으로 지출 항목 표시 */
+}
+.income-category {
+  color: blue; /* 파란색으로 수입 항목 표시 */
+}
+.transfer-category {
+  color: green; /* 초록색으로 이체 항목 표시 */
+}
 
-/* 트랜잭션 스타일 */
-.transactions {
-  margin-bottom: 1rem;
-} /* 기본 스타일 설정 */
+/* 기본 스타일 설정 */
 * {
   margin: 0;
   padding: 0;
@@ -509,8 +498,10 @@ button:focus {
 }
 
 /* 트랜잭션 스타일 */
+
 .transactions {
   margin-bottom: 1rem;
+  margin-top: 1rem;
   flex: 1; /* 여유 공간 차지 */
   overflow-y: auto; /* 세로 스크롤 */
 }
@@ -524,17 +515,21 @@ button:focus {
 }
 
 .transaction-date {
-  background-color: #c9ebe4;
+  background-color: #bbe8df;
   flex: 1;
-  border-radius: 5px;
+  height: 29px;
+  display: flex;
+}
+
+.bold-date {
+  font-weight: bold;
+  font-size: 15px;
+  margin-left: 10px;
 }
 
 .transaction-details {
   display: flex;
   justify-content: space-between;
-}
-.bold-date {
-  font-weight: bold;
 }
 
 .description,
@@ -708,28 +703,6 @@ button:focus {
     position: absolute;
     top: 3.5rem;
   }
-}
-
-.transaction {
-  background-color: #f9f9f9;
-  padding: 0.5rem;
-  margin-bottom: 0.5rem;
-  border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-}
-
-.transaction-date {
-  background-color: #c9ebe4;
-  flex: 1;
-  border-radius: 5px;
-}
-
-.transaction-details {
-  display: flex;
-  justify-content: space-between;
-}
-.bold-date {
-  font-weight: bold;
 }
 
 .description,
@@ -949,7 +922,7 @@ button:focus {
 
 .addButton {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between; /* 저장 버튼과 닫기 버튼을 좌우로 정렬 */
   align-items: center; /* 세로 중앙 정렬 */
   margin-top: 20px;
 }
@@ -957,16 +930,14 @@ button:focus {
 .addButton button {
   padding: 10px 20px;
   border: none;
-  border-radius: 15px;
-  background-color: #eeeeee;
-  color: #111111;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
   cursor: pointer;
-  margin-left: 10px;
 }
 
 .addButton button:hover {
-  background-color: #96e8cd;
-  color: #111111;
+  background-color: #a7dad0;
 }
 
 /* 모바일 디바이스 대응을 위한 미디어 쿼리 */

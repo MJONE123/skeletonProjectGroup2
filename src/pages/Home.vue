@@ -1,41 +1,8 @@
 <template>
   <div class="container">
-    <!-- <div class="button-container">
-      <div class="btn-group btn-group-sm rounded-pill">
-        <button type="button" class="btn btn-primary start-btn">일일</button>
-        <router-link to="/calendar" type="button" class="btn btn-primary">
-          월별
-        </router-link>
-        <button
-          @click="routerPush('/chart')"
-          type="button"
-          class="btn btn-primary end-btn"
-        >
-          합계
-        </button>
-      </div>
-      <button @click="routerPush('/Settings')">
-        <i class="bi bi-gear"></i>
-      </button>
-    </div> -->
     <Header />
 
-    <!-- 월 변경 바 -->
-    <div class="home_header">
-      <button @click="prevMonth">
-        <i class="mdi mdi-chevron-left"></i>
-      </button>
-
-      <div class="header-center">
-        {{ currentYearMonth }}
-      </div>
-
-      <button @click="nextMonth">
-        <i class="mdi mdi-chevron-right"></i>
-      </button>
-    </div>
-
-    <!-- <div class="header">
+    <div class="header">
       <div class="header-left">
         <button @click="prevMonth"><i class="mdi mdi-chevron-left"></i></button>
       </div>
@@ -47,22 +14,20 @@
           <i class="mdi mdi-chevron-right"></i>
         </button>
       </div>
-    </div> -->
-
+    </div>
     <!-- 요약 -->
     <SummaryStats
       :income="totalIncome"
       :expense="totalExpense"
       :filters="filters"
     />
+    <!-- 입력한 거래내역 -->
     <div class="transactions">
       <div v-for="(transactions, date) in groupedTransactions" :key="date">
         <div class="transaction-date">
-          <span
-            ><button class="bold-date">
-              {{ formatDateWithoutMonth(date) }} ({{ formatDayOfWeek(date) }})
-            </button></span
-          >
+          <button class="bold-date">
+            {{ formatDateWithoutMonth(date) }} ({{ formatDayOfWeek(date) }})
+          </button>
         </div>
         <div
           v-for="transaction in transactions"
@@ -73,11 +38,11 @@
             <div class="description">{{ transaction.description }}</div>
             <div class="method">{{ transaction.method }}</div>
             <div
-              :class="{
-                amount: true,
-                income: transaction.amount > 0,
-                expense: transaction.amount < 0,
-              }"
+              :class="[
+                'amount',
+                { income: transaction.type === 'income' },
+                { expense: transaction.type === 'expense' },
+              ]"
             >
               {{ formatAmount(transaction.amount) }}원
             </div>
@@ -88,21 +53,6 @@
     <div class="footer">
       <button @click="showModal = true"><i class="fa fa-plus"></i></button>
     </div>
-    <!-- <div class="summary">
-      <div>
-        <button>
-          수입<span class="income">{{ income }}원 </span>
-        </button>
-      </div>
-      <div>
-        <button>
-          지출<span class="expenses">{{ expenses }}원</span>
-        </button>
-      </div>
-      <div>
-        <span class="totalBalance">합계{{ totalBalance }}원</span>
-      </div>
-    </div> -->
 
     <!-- 모달 창 -->
     <div v-if="showModal" class="modal">
@@ -119,24 +69,16 @@ import { useTransactionStore } from '@/stores/transaction';
 import { useRouter } from 'vue-router';
 import AddTransaction from './AddTransaction.vue';
 import Header from '@/components/Header.vue'; // Header 컴포넌트 가져오기
-import SummaryStats from '@/components/SummaryStats.vue'; // SummaryStats 컴포넌트 가져오기
 
 const router = useRouter();
 const transactionStore = useTransactionStore();
 const currentDate = ref(new Date());
 const showModal = ref(false);
-const filters = ref({
-  showIncome: true,
-  showExpense: true,
-  showBalance: true,
-});
 
 function modalHandler(data) {
   showModal.value = data;
 }
 
-const totalIncome = computed(() => transactionStore.totalIncome);
-const totalExpense = computed(() => transactionStore.totalExpense);
 const income = computed(() =>
   transactionStore.getIncomeForMonth(currentDate.value).toLocaleString()
 );
@@ -206,6 +148,16 @@ const groupedTransactions = computed(() => {
     groups[date].push(transaction);
     return groups;
   }, {});
+});
+const computedTotalBalance = computed(() => {
+  let total = 0;
+  transactions.value.forEach((transaction) => {
+    total +=
+      transaction.type === 'income'
+        ? transaction.amount
+        : -Math.abs(transaction.amount);
+  });
+  return total.toLocaleString();
 });
 </script>
 

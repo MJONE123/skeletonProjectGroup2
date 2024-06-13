@@ -32,11 +32,24 @@
       <div>
         <label for="category">분류</label>
         <select v-model="category">
-          <option value="">분류를 선택해주세요</option>
-          <option value="식비">식비</option>
-          <option value="교통비">교통비</option>
-          <option value="쇼핑">쇼핑</option>
-          <option value="기타">기타</option>
+          <option v-if="type === 'income'" value="">항목을 선택해주세요</option>
+          <option v-if="type === 'income'" value="월급">월급</option>
+          <option v-if="type === 'income'" value="용돈">용돈</option>
+          <option v-if="type === 'income'" value="기타">기타</option>
+
+          <option v-if="type === 'expense'" value="">
+            항목을 선택해주세요
+          </option>
+          <option v-if="type === 'expense'" value="식비">식비</option>
+          <option v-if="type === 'expense'" value="교통비">교통비</option>
+          <option v-if="type === 'expense'" value="패션/미용">패션/미용</option>
+          <option v-if="type === 'expense'" value="기타">기타</option>
+
+          <option v-if="type === 'transfer'" value="">
+            항목을 선택해주세요
+          </option>
+          <option v-if="type === 'transfer'" value="나에게">나에게</option>
+          <option v-if="type === 'transfer'" value="기타">기타</option>
         </select>
       </div>
       <div>
@@ -45,8 +58,8 @@
       </div>
     </div>
     <div class="addButton">
-      <button @click="closeModal">닫기</button>
       <button @click="submitTransaction">저장</button>
+      <button @click="closeModal">닫기</button>
     </div>
   </div>
 </template>
@@ -65,7 +78,6 @@ const description = ref('');
 const showModal = ref(false); // 모달을 처음에 보여주도록 설정
 
 const setType = (newType) => {
-  // console.log(newType);
   type.value = newType;
 };
 
@@ -88,6 +100,12 @@ const submitTransaction = () => {
     alert('내용을 기입해주세요.');
     return;
   }
+
+  let finalAmount = parseFloat(amount.value);
+  if (type.value === 'expense') {
+    finalAmount = -Math.abs(finalAmount);
+  }
+
   const transaction = {
     type: type.value,
     date: date.value,
@@ -95,14 +113,9 @@ const submitTransaction = () => {
     category: category.value,
     description: description.value,
   };
+  console.log(transaction);
 
-  console.log(type.value);
-
-  if (type.value === 'income') {
-    transactionStore.addIncomeTransaction(transaction);
-  } else {
-    transactionStore.addExpenseTransaction(transaction);
-  }
+  transactionStore.addTransaction(transaction);
 
   // Clear the form fields after submission
   date.value = '';
