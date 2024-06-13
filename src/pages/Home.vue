@@ -55,14 +55,14 @@
       :expense="totalExpense"
       :filters="filters"
     />
+
+    <!-- 입력한 거래내역 -->
     <div class="transactions">
       <div v-for="(transactions, date) in groupedTransactions" :key="date">
         <div class="transaction-date">
-          <span
-            ><button class="bold-date">
-              {{ formatDateWithoutMonth(date) }} ({{ formatDayOfWeek(date) }})
-            </button></span
-          >
+          <button class="bold-date">
+            {{ formatDateWithoutMonth(date) }} ({{ formatDayOfWeek(date) }})
+          </button>
         </div>
         <div
           v-for="transaction in transactions"
@@ -88,6 +88,7 @@
     <div class="footer">
       <button @click="showModal = true"><i class="fa fa-plus"></i></button>
     </div>
+
     <!-- <div class="summary">
       <div>
         <button>
