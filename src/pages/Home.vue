@@ -15,32 +15,19 @@
         </button>
       </div>
     </div>
-    <!-- <요약 탭> -->
-    <div class="summary">
-      <div>
-        <button>
-          수입<span class="income">{{ income }}원 </span>
-        </button>
-      </div>
-      <div>
-        <button>
-          지출<span class="expenses">{{ expenses }}원</span>
-        </button>
-      </div>
-      <div>
-        <span class="totalBalance">합계{{ computedTotalBalance }}원</span>
-      </div>
-    </div>
-
-    <!-- <거래 내역 탭> -->
+    <!-- 요약 -->
+    <SummaryStats
+      :income="totalIncome"
+      :expense="totalExpense"
+      :filters="filters"
+    />
+    <!-- 입력한 거래내역 -->
     <div class="transactions">
       <div v-for="(transactions, date) in groupedTransactions" :key="date">
         <div class="transaction-date">
-          <span
-            ><button class="bold-date">
-              {{ formatDateWithoutMonth(date) }} ({{ formatDayOfWeek(date) }})
-            </button></span
-          >
+          <button class="bold-date">
+            {{ formatDateWithoutMonth(date) }} ({{ formatDayOfWeek(date) }})
+          </button>
         </div>
         <div
           v-for="transaction in transactions"

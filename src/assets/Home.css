@@ -253,10 +253,7 @@ button:focus {
   color: green; /* 초록색으로 이체 항목 표시 */
 }
 
-/* 트랜잭션 스타일 */
-.transactions {
-  margin-bottom: 1rem;
-} /* 기본 스타일 설정 */
+/* 기본 스타일 설정 */
 * {
   margin: 0;
   padding: 0;
@@ -501,8 +498,10 @@ button:focus {
 }
 
 /* 트랜잭션 스타일 */
+
 .transactions {
   margin-bottom: 1rem;
+  margin-top: 1rem;
   flex: 1; /* 여유 공간 차지 */
   overflow-y: auto; /* 세로 스크롤 */
 }
@@ -516,17 +515,21 @@ button:focus {
 }
 
 .transaction-date {
-  background-color: #c9ebe4;
+  background-color: #bbe8df;
   flex: 1;
-  border-radius: 5px;
+  height: 29px;
+  display: flex;
+}
+
+.bold-date {
+  font-weight: bold;
+  font-size: 15px;
+  margin-left: 10px;
 }
 
 .transaction-details {
   display: flex;
   justify-content: space-between;
-}
-.bold-date {
-  font-weight: bold;
 }
 
 .description,
@@ -691,28 +694,6 @@ button:focus {
     position: absolute;
     top: 3.5rem;
   }
-}
-
-.transaction {
-  background-color: #f9f9f9;
-  padding: 0.5rem;
-  margin-bottom: 0.5rem;
-  border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-}
-
-.transaction-date {
-  background-color: #c9ebe4;
-  flex: 1;
-  border-radius: 5px;
-}
-
-.transaction-details {
-  display: flex;
-  justify-content: space-between;
-}
-.bold-date {
-  font-weight: bold;
 }
 
 .description,
