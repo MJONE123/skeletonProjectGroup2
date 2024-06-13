@@ -22,7 +22,7 @@
 
 .arrow_go_back {
   position: absolute;
-  left: 40px; /* 오른쪽 끝으로 정렬 */
+  left: 30px; /* 오른쪽 끝으로 정렬 */
   font-size: 24px;
   color: #111111;
   cursor: pointer;

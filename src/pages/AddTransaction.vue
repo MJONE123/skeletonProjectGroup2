@@ -1,4 +1,5 @@
 <template>
+  <!-- 수입/지출/이체 분류 -->
   <div class="input-form">
     <div class="input-header">
       <button @click="setType('income')" :class="{ active: type === 'income' }">
@@ -17,6 +18,8 @@
         이체
       </button>
     </div>
+
+    <!-- 내역 input -->
     <div class="input-fields">
       <div>
         <label for="date">날짜</label>
