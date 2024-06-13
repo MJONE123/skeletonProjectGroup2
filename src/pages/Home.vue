@@ -14,15 +14,13 @@
           <i class="mdi mdi-chevron-right"></i>
         </button>
       </div>
-    </div> -->
-
+    </div>
     <!-- 요약 -->
     <SummaryStats
       :income="totalIncome"
       :expense="totalExpense"
       :filters="filters"
     />
-
     <!-- 입력한 거래내역 -->
     <div class="transactions">
       <div v-for="(transactions, date) in groupedTransactions" :key="date">
@@ -150,6 +148,16 @@ const groupedTransactions = computed(() => {
     groups[date].push(transaction);
     return groups;
   }, {});
+});
+const computedTotalBalance = computed(() => {
+  let total = 0;
+  transactions.value.forEach((transaction) => {
+    total +=
+      transaction.type === 'income'
+        ? transaction.amount
+        : -Math.abs(transaction.amount);
+  });
+  return total.toLocaleString();
 });
 </script>
 
