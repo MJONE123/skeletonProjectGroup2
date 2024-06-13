@@ -11,7 +11,7 @@
           type="button"
           class="btn btn-primary end-btn"
         >
-          요약
+          합계
         </button>
       </div>
       <button @click="routerPush('/Settings')">
@@ -32,7 +32,6 @@
         </button>
       </div>
     </div>
-
     <div class="summary">
       <div>
         <button>
@@ -142,6 +141,7 @@ const formatDateWithoutMonth = (date) => {
   const [year, month, day] = date.split('-');
   return `${parseInt(day)}일`;
 };
+
 const formatDayOfWeek = (date) => {
   const dayOfWeek = new Date(date).getDay();
   const days = [
@@ -155,6 +155,7 @@ const formatDayOfWeek = (date) => {
   ];
   return days[dayOfWeek];
 };
+
 const formatAmount = (amount) => {
   if (!amount) return '';
   return amount.toLocaleString();
@@ -171,4 +172,5 @@ const groupedTransactions = computed(() => {
   }, {});
 });
 </script>
+
 <style src="@/assets/Home.css"></style>
