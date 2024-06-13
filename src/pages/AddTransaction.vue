@@ -2,9 +2,21 @@
   <!-- 수입/지출/이체 분류 -->
   <div class="input-form">
     <div class="input-header">
-      <button @click="setType('income')" :class="{ active: type === 'income' }">수입</button>
-      <button @click="setType('expense')" :class="{ active: type === 'expense' }">지출</button>
-      <button @click="setType('transfer')" :class="{ active: type === 'transfer' }">이체</button>
+      <button @click="setType('income')" :class="{ active: type === 'income' }">
+        수입
+      </button>
+      <button
+        @click="setType('expense')"
+        :class="{ active: type === 'expense' }"
+      >
+        지출
+      </button>
+      <button
+        @click="setType('transfer')"
+        :class="{ active: type === 'transfer' }"
+      >
+        이체
+      </button>
     </div>
 
     <!-- 내역 input -->
@@ -33,8 +45,8 @@
       </div>
     </div>
     <div class="addButton">
-      <button @click="submitTransaction">저장</button>
       <button @click="closeModal">닫기</button>
+      <button @click="submitTransaction">저장</button>
     </div>
   </div>
 </template>
