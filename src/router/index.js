@@ -1,7 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '@/pages/Home.vue';
 import Calendar from '@/pages/Calendar.vue';
+import Chart from '../pages/chart.vue';
 import Settings from '@/pages/Settings.vue';
+import Cal from '@/components/Cal.vue';
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -21,6 +24,8 @@ const router = createRouter({
       name: 'Settings',
       component: Settings,
     },
+    { path: '/cal', component: Cal },
+    { path: '/chart', component: Chart },
   ],
 });
 
