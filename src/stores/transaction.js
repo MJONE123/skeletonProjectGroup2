@@ -1,9 +1,28 @@
-import { ref, computed } from 'vue';
+import { ref, computed, reactive } from 'vue';
 import { defineStore } from 'pinia';
+import axios from 'axios';
 
 export const useTransactionStore = defineStore('transaction', () => {
-  const income = ref(500000);
-  const expenses = ref(40000);
+  const income = ref(0);
+  const expenses = ref(0);
+  const state = reactive({
+    income: [],
+    expense: [],
+  });
+  async function fetchIncomeData() {
+    try {
+      const fetchIncomeDataRes = await axios.get(
+        'http://localhost:3000/income'
+      );
+      state.income = fetchIncomeDataRes.data;
+      console.log(fetchIncomeDataRes.data);
+    } catch (error) {
+      alert('TodoList 데이터 통신 Err 발생');
+      console.log(error);
+    }
+  }
+  fetchIncomeData();
+
   const transactions = ref([
     {
       id: 1,
