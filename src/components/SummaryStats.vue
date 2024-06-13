@@ -1,22 +1,22 @@
 <template>
   <div class="summary-stats">
-    <div class="stat" @click="toggleFilter('income')" :class="{ active: showIncome }">
+    <div class="stat" @click="toggleFilter('showIncome')" :class="{ active: filters.showIncome }">
       <div class="title">수입</div>
       <div class="value income">{{ formatNumber(income) }}원</div>
     </div>
-    <div class="stat" @click="toggleFilter('expense')" :class="{ active: showExpense }">
+    <div class="stat" @click="toggleFilter('showExpense')" :class="{ active: filters.showExpense }">
       <div class="title">지출</div>
       <div class="value expense">{{ formatNumber(expense) }}원</div>
     </div>
-    <div class="stat" @click="toggleFilter('balance')" :class="{ active: showBalance }">
-      <div class="title">통계</div>
+    <div class="stat" @click="toggleFilter('showBalance')" :class="{ active: filters.showBalance }">
+      <div class="title">합계</div>
       <div class="value">{{ formatNumber(balance) }}원</div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { computed, toRefs, defineEmits, ref, watch } from 'vue';
+import { computed, toRefs } from 'vue';
 
 const props = defineProps({
   income: Number,
@@ -26,37 +26,23 @@ const props = defineProps({
 
 const emit = defineEmits(['updateFilter']);
 
-const { income, expense } = toRefs(props);
+const { income, expense, filters } = toRefs(props);
 const balance = computed(() => income.value - expense.value);
-
-const showIncome = ref(props.filters.showIncome);
-const showExpense = ref(props.filters.showExpense);
-const showBalance = ref(props.filters.showBalance);
-
-watch(
-  () => props.filters,
-  (newFilters) => {
-    showIncome.value = newFilters.showIncome;
-    showExpense.value = newFilters.showExpense;
-    showBalance.value = newFilters.showBalance;
-  },
-  { deep: true }
-);
 
 function formatNumber(value) {
   return value.toLocaleString();
 }
 
-function toggleFilter(filter) {
-  if (filter === 'income') {
-    showIncome.value = !showIncome.value;
-  } else if (filter === 'expense') {
-    showExpense.value = !showExpense.value;
-  } else if (filter === 'balance') {
-    showBalance.value = !showBalance.value;
+function toggleFilter(filterKey) {
+  const newFilters = { ...filters.value, [filterKey]: !filters.value[filterKey] };
+
+  if (!newFilters.showIncome && !newFilters.showExpense && !newFilters.showBalance) {
+    newFilters.showIncome = true;
+    newFilters.showExpense = true;
+    newFilters.showBalance = true;
   }
 
-  emit('updateFilter', { showIncome: showIncome.value, showExpense: showExpense.value, showBalance: showBalance.value });
+  emit('updateFilter', newFilters);
 }
 </script>
 
