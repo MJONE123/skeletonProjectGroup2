@@ -736,7 +736,7 @@ button:focus {
 }
 
 /* 달력 모달 스타일 */
-.modal {
+.modinl {
   display: none;
   position: fixed;
   z-index: 1;
@@ -817,42 +817,82 @@ button:focus {
 /* 여기부터는 인풋 모달창 */
 .input-form {
   padding: 20px;
-  background-color: #f0f0f0;
-  border-radius: 10px;
+  background-color: #ffffff;
+  border-radius: 40px;
 }
 .input-header {
   display: flex;
   justify-content: space-around;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 .input-header button {
-  padding: 10px 20px;
+  position: relative;
+  justify-content: center; /* btn_group을 가운데 정렬 */
+  flex: 1;
+  margin: 5px;
+  padding: 10px 0;
+  border-radius: 15px;
   border: none;
-  border-radius: 5px;
-  background-color: #ccc;
+
+  background-color: #eeeeee;
+  width: 113px;
+  height: 46px;
+
   cursor: pointer;
+
+  font-weight: bold;
+  font-size: 15px;
+  color: #111111;
 }
-.input-header button:hover {
+/* .input-header button:hover {
   background-color: #a7dad0;
   cursor: pointer;
-}
+} */
 .input-header button.active {
-  background-color: #007bff;
-  color: white;
+  background-color: #96e8cd;
+  color: #111111;
 }
+.input-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #adcdd0;
+  border-radius: 15px;
+  padding: 30px;
+
+  width: 100%;
+  height: 100%;
+
+  color: #111111;
+  font-weight: bold;
+}
+
 .input-fields div {
-  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* flex-direction: row; */
 }
-.input-fields label {
-  display: block;
-  margin-bottom: 5px;
-}
-.input-fields input {
+
+.input-fields input,
+.input-fields select {
+  flex: 5;
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: 1px solid #bdbdbd;
+  border-radius: 10px;
+  box-sizing: border-box;
+  margin-left: 5px;
 }
+
+.input-fields label {
+  /* flex: 1;  */
+  width: 40px;
+  text-align: center;
+  margin-right: 5px;
+  align-items: center;
+}
+
 /* +버튼을 눌렀을 때 생기는 입력 모달 창 */
 .modal {
   display: flex; /* 모달이 제대로 표시되도록 flex 설정 */
@@ -866,29 +906,19 @@ button:focus {
   background: rgba(0, 0, 0, 0.5);
   z-index: 1000;
 }
+.modal.modal-fullsize {
+  width: 100%;
+  height: 100%;
+  margin: 10px;
+  padding: 10px;
+}
+
 .modal-content {
   background: white;
   padding: 20px;
   border-radius: 5px;
   max-width: 500px;
   width: 90%;
-}
-.input-fields input,
-.input-fields select {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
-}
-
-.input-fields div {
-  margin-bottom: 15px;
-}
-
-.input-fields label {
-  display: block;
-  margin-bottom: 5px;
 }
 
 .addButton {
