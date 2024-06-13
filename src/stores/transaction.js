@@ -37,6 +37,34 @@ export const useTransactionStore = defineStore('transaction', () => {
 
   const totalBalance = computed(() => income.value - expenses.value);
 
+  const getTransactionsForMonth = (date) => {
+    const month = date.getMonth();
+    const year = date.getFullYear();
+    return transactions.value.filter((transaction) => {
+      const transactionDate = new Date(transaction.date);
+      return (
+        transactionDate.getMonth() === month &&
+        transactionDate.getFullYear() === year
+      );
+    });
+  };
+
+  const getIncomeForMonth = (date) => {
+    return getTransactionsForMonth(date)
+      .filter((transaction) => transaction.amount > 0)
+      .reduce((sum, transaction) => sum + transaction.amount, 0);
+  };
+
+  const getExpensesForMonth = (date) => {
+    return getTransactionsForMonth(date)
+      .filter((transaction) => transaction.amount < 0)
+      .reduce((sum, transaction) => sum + transaction.amount, 0);
+  };
+
+  const getTotalBalanceForMonth = (date) => {
+    return getIncomeForMonth(date) + getExpensesForMonth(date);
+  };
+
   function addTransaction(transaction) {
     transactions.value.push(transaction);
     if (transaction.amount > 0) {
@@ -52,5 +80,9 @@ export const useTransactionStore = defineStore('transaction', () => {
     transactions,
     totalBalance,
     addTransaction,
+    getTransactionsForMonth,
+    getIncomeForMonth,
+    getExpensesForMonth,
+    getTotalBalanceForMonth,
   };
 });
