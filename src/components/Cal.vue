@@ -4,33 +4,61 @@
 
     <!-- 월 변경 바 -->
     <div class="calendar_header">
-      <button @click="prevMonth">&lt;</button>
+      <button @click="prevMonth"><i class="mdi mdi-chevron-left"></i></button>
       <div class="calendar_month">{{ year }}년 {{ month }}월</div>
-      <button @click="nextMonth">&gt;</button>
+      <button @click="nextMonth"><i class="mdi mdi-chevron-right"></i></button>
     </div>
 
-    <SummaryStats :income="totalIncome" :expense="totalExpense" :filters="filters" @updateFilter="setFilter" />
+    <SummaryStats
+      :income="totalIncome"
+      :expense="totalExpense"
+      :filters="filters"
+      @updateFilter="setFilter"
+    />
 
     <!-- 요일 -->
     <div class="days_of_week mt-3">
-      <div class="days" v-for="(day, index) in daysOfWeek" :key="day" :class="{ sunday: index === 0, saturday: index === 6 }">{{ day }}</div>
+      <div
+        class="days"
+        v-for="(day, index) in daysOfWeek"
+        :key="day"
+        :class="{ sunday: index === 0, saturday: index === 6 }"
+      >
+        {{ day }}
+      </div>
     </div>
     <!-- 날짜 -->
     <div class="grid">
       <!-- 시작 날짜 전에 빈 칸 생성 -->
       <div class="day" v-for="blank in blankDays" :key="'blank-' + blank"></div>
       <div class="day" v-for="day in days" :key="day.dateString">
-        <div class="date" :class="{ sunday: new Date(year, month - 1, day.date).getDay() === 0, saturday: new Date(year, month - 1, day.date).getDay() === 6 }">
+        <div
+          class="date"
+          :class="{
+            sunday: new Date(year, month - 1, day.date).getDay() === 0,
+            saturday: new Date(year, month - 1, day.date).getDay() === 6,
+          }"
+        >
           <div class="date">{{ day.date }}</div>
           <div class="day_details">
-            <div v-if="filters.showIncome && day.income" class="income">{{ formatNumber(day.income) }}</div>
-            <div v-if="filters.showExpense && day.expense" class="expense">{{ formatNumber(day.expense) }}</div>
-            <div v-if="filters.showBalance && day.balance" class="balance">{{ formatNumber(day.balance) }}</div>
+            <div v-if="filters.showIncome && day.income" class="income">
+              {{ formatNumber(day.income) }}
+            </div>
+            <div v-if="filters.showExpense && day.expense" class="expense">
+              {{ formatNumber(day.expense) }}
+            </div>
+            <div v-if="filters.showBalance && day.balance" class="balance">
+              {{ formatNumber(day.balance) }}
+            </div>
           </div>
         </div>
       </div>
       <!-- 마지막 날짜 뒤에 빈 칸 생성 -->
-      <div class="day" v-for="blank in blankDaysEnd" :key="'blank-end-' + blank"></div>
+      <div
+        class="day"
+        v-for="blank in blankDaysEnd"
+        :key="'blank-end-' + blank"
+      ></div>
     </div>
   </div>
 </template>
@@ -54,8 +82,12 @@ const filters = ref({
 
 const data = ref({});
 
-const totalIncome = computed(() => days.value.reduce((total, day) => total + day.income, 0));
-const totalExpense = computed(() => days.value.reduce((total, day) => total + day.expense, 0));
+const totalIncome = computed(() =>
+  days.value.reduce((total, day) => total + day.income, 0)
+);
+const totalExpense = computed(() =>
+  days.value.reduce((total, day) => total + day.expense, 0)
+);
 
 async function fetchData() {
   const response = await fetch('/data.json');
@@ -110,7 +142,9 @@ function generateDays(year, month) {
       dateString, // 날짜 문자열을 추가하여 키로 사용
       income: data.value[dateString]?.income || 0,
       expense: data.value[dateString]?.expense || 0,
-      balance: (data.value[dateString]?.income || 0) - (data.value[dateString]?.expense || 0),
+      balance:
+        (data.value[dateString]?.income || 0) -
+        (data.value[dateString]?.expense || 0),
     });
     date.setUTCDate(date.getUTCDate() + 1); // 날짜를 하루씩 증가
   }
@@ -161,7 +195,7 @@ updateCalendar(year.value, month.value); // 초기 달력 설정
 .calendar_header {
   display: flex;
   height: 80px;
-  font-size: 17px;
+  font-size: 18px;
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px 0 20px;
