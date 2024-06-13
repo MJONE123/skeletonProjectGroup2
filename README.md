@@ -10,16 +10,30 @@ This template should help get you started developing with Vue 3 in Vite.
 
 See [Vite Configuration Reference](https://vitejs.dev/config/).
 
-## Project Setup
+## 프로젝트 셋업
 
 ```sh
 npm install
 ```
+```sh
+npm install npx
+```
+```sh
+npm install chartjs chart.js
+```
 
-### Compile and Hot-Reload for Development
+```sh
+npm install json-server
+```
+
+### 실행
 
 ```sh
 npm run dev
+```
+
+```sh
+npx json-server db.json
 ```
 
 ### Compile and Minify for Production
