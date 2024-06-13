@@ -25,7 +25,11 @@ const router = createRouter({
       component: Settings,
     },
     { path: '/cal', component: Cal },
-    { path: '/chart', component: Chart },
+    {
+      path: '/chart',
+      name: 'chart',
+      component: Chart,
+    },
   ],
 });
 
